@@ -7,9 +7,9 @@
 // Cada "nodo" tiene un mensaje del bot y una lista de opciones.
 // Cada opción indica a qué nodo se debe ir si el usuario la elige.
 var preguntas = {
-
   inicio: {
-    mensaje: "¡Hola! 👋 Soy EduBot, tu asistente virtual. ¿Sobre qué tema necesitas información?",
+    mensaje:
+      "¡Hola! 👋 Soy EduBot, tu asistente virtual. ¿Sobre qué tema necesitas información?",
     opciones: [
       { texto: "📅 Inicio de clases", siguiente: "inicioClases" },
       { texto: "⏰ Horario de clases", siguiente: "horario" },
@@ -17,70 +17,61 @@ var preguntas = {
       { texto: "🗓️ Días de formación", siguiente: "dias" },
       { texto: "📝 Proceso de evaluación", siguiente: "evaluacion" },
       { texto: "🎓 Requisitos para graduarme", siguiente: "graduacion" },
-      { texto: "✏️ Proceso de matrícula", siguiente: "matricula" }
-    ]
+      { texto: "✏️ Proceso de matrícula", siguiente: "matricula" },
+    ],
   },
 
   inicioClases: {
-    mensaje: "Las clases inician el primer lunes de cada trimestre. Te recomendamos confirmar la fecha exacta con la coordinación académica.",
-    opciones: [
-      { texto: "⬅️ Volver al menú principal", siguiente: "inicio" }
-    ]
+    mensaje:
+      "Las clases impartidas por el SENA constan de 3 trimestres, inician en febrero y culminan en noviembre.",
+    opciones: [{ texto: "⬅️ Volver al menú principal", siguiente: "inicio" }],
   },
 
   horario: {
-    mensaje: "Contamos con tres jornadas: mañana (6:00am - 12:00m), tarde (12:00m - 6:00pm) y noche (6:00pm - 10:00pm).",
-    opciones: [
-      { texto: "⬅️ Volver al menú principal", siguiente: "inicio" }
-    ]
+    mensaje:
+      "La formación es impartida en contra jornada, de 7:30 am - 11:30 am para quienes estudian en la tarde y de 1:30 pm - 5:30 pm para los que estudian en la mañana.",
+    opciones: [{ texto: "⬅️ Volver al menú principal", siguiente: "inicio" }],
   },
 
   programas: {
-    mensaje: "Ofrecemos programas de formación como Análisis y Desarrollo de Software, Multimedia, Redes y Gestión Empresarial, entre otros.",
-    opciones: [
-      { texto: "⬅️ Volver al menú principal", siguiente: "inicio" }
-    ]
+    mensaje:
+      "La Institución Educativa Nuevo Bosque tiene articulados tres (3 )programas de formación: Sistemas Teleinformáticos, Programación de Software, Asistencia Administrativa y Operaciones Logísticas, entre otros.",
+    opciones: [{ texto: "⬅️ Volver al menú principal", siguiente: "inicio" }],
   },
 
   dias: {
-    mensaje: "La formación se desarrolla de lunes a viernes. Algunos programas incluyen jornada los sábados según el horario asignado.",
-    opciones: [
-      { texto: "⬅️ Volver al menú principal", siguiente: "inicio" }
-    ]
+    mensaje: "La formación es impartida dos veces por semana.",
+    opciones: [{ texto: "⬅️ Volver al menú principal", siguiente: "inicio" }],
   },
 
   evaluacion: {
-    mensaje: "La evaluación es por competencias: se valoran conocimiento, desempeño y producto a través de las evidencias entregadas durante la formación.",
-    opciones: [
-      { texto: "⬅️ Volver al menú principal", siguiente: "inicio" }
-    ]
+    mensaje:
+      "El SENA posee una serie de competencias, cada una de ellas posee unos resultados de aprendizajes, el conjunto de resultados de aprendizajes evaluados permiten aprobar la competencia.",
+    opciones: [{ texto: "⬅️ Volver al menú principal", siguiente: "inicio" }],
   },
 
   graduacion: {
-    mensaje: "Para graduarte debes completar todas las competencias del programa, cumplir con las horas de práctica y no tener documentación pendiente.",
-    opciones: [
-      { texto: "⬅️ Volver al menú principal", siguiente: "inicio" }
-    ]
+    mensaje:
+      "Para obtener la certificación técnica debes tener la documentación al dia, tales como: certificados de eps, pruebas ICFES, documento de identificación y cualquier otro tipo de documento requerido por tu instructor.",
+    opciones: [{ texto: "⬅️ Volver al menú principal", siguiente: "inicio" }],
   },
 
   matricula: {
-    mensaje: "El proceso de matrícula se realiza en la plataforma institucional: debes cargar tus documentos y confirmar el cupo asignado.",
-    opciones: [
-      { texto: "⬅️ Volver al menú principal", siguiente: "inicio" }
-    ]
+    mensaje:
+      "El proceso de matrícula se realiza en la plataforma institucional: debes cargar tus documentos y confirmar el cupo asignado.",
+    opciones: [{ texto: "⬅️ Volver al menú principal", siguiente: "inicio" }],
   },
 
   noEncontrado: {
-    mensaje: "No logré identificar tu pregunta 😅. Puedes intentar con otras palabras o elegir una opción del menú.",
-    opciones: [
-      { texto: "⬅️ Volver al menú principal", siguiente: "inicio" }
-    ]
-  }
+    mensaje:
+      "No logré identificar tu pregunta 😅. Puedes intentar con otras palabras o elegir una opción del menú.",
+    opciones: [{ texto: "⬅️ Volver al menú principal", siguiente: "inicio" }],
+  },
 };
 
 // -------- Variables generales --------
-var idActual = "inicio";       // nodo que se está mostrando actualmente
-var historial = [];            // pila para la función "Atrás"
+var idActual = "inicio"; // nodo que se está mostrando actualmente
+var historial = []; // pila para la función "Atrás"
 
 // -------- Elementos del DOM --------
 var chatWindow = document.getElementById("chatWindow");
@@ -93,7 +84,8 @@ var btnInicio = document.getElementById("btnInicio");
 // -------- Función para agregar un mensaje al chat --------
 function agregarMensaje(texto, tipo) {
   var burbuja = document.createElement("div");
-  burbuja.className = "mensaje " + (tipo === "usuario" ? "mensaje-usuario" : "mensaje-bot");
+  burbuja.className =
+    "mensaje " + (tipo === "usuario" ? "mensaje-usuario" : "mensaje-bot");
 
   var parrafo = document.createElement("p");
   parrafo.textContent = texto;
@@ -119,7 +111,10 @@ function mostrarOpciones(opciones) {
     enlace.textContent = opcion.texto;
 
     // función de callback ejecutada al hacer clic en la opción
-    enlace.addEventListener("click", crearManejadorClic(opcion.siguiente, opcion.texto));
+    enlace.addEventListener(
+      "click",
+      crearManejadorClic(opcion.siguiente, opcion.texto),
+    );
 
     item.appendChild(enlace);
     listaOpciones.appendChild(item);
@@ -193,7 +188,10 @@ function buscarPorTexto(texto, callback) {
     idEncontrado = "evaluacion";
   } else if (palabra.indexOf("gradua") !== -1) {
     idEncontrado = "graduacion";
-  } else if (palabra.indexOf("matricula") !== -1 || palabra.indexOf("matrícula") !== -1) {
+  } else if (
+    palabra.indexOf("matricula") !== -1 ||
+    palabra.indexOf("matrícula") !== -1
+  ) {
     idEncontrado = "matricula";
   }
 
